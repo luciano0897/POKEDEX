@@ -7,9 +7,9 @@ const input = document.querySelector('.input__search')
 const buttonPrev = document.querySelector('.btn-prev');
 const buttonNext = document.querySelector('.btn-next');
 
-let searchPokemon = 1;
+let procurarPokemon = 1;
 
-
+// esta funcão puchar os dados do pokemon ('api').
 const fetchPokemon = async (pokemon)=>{
     const APIResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
 
@@ -30,9 +30,9 @@ const renderPokemon = async(pokemon)=>{
         pokemonImage.style.display = 'block';
         pokemonName.innerHTML = data.name;
         pokemonNumber.innerHTML = data.id;
-        pokemonImage.src = data['sprites']['pokemon']['versions']['generation-v']['black-white']['animated']['front_default'];
+        pokemonImage.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
         input.value = '';
-        searchPokemon = data.id;
+        procurarPokemon = data.id;
     }else{
         pokemonImage.style.display = 'none';
         pokemonName.innerHTML = 'Nao Encontrado :c';
@@ -47,20 +47,22 @@ pokemonform.addEventListener('submit', (event)=>{
     renderPokemon(input.value);
     
 });
+
+//função são do click dos botões 
 buttonPrev.addEventListener('click', ()=>{
-    if(searchPokemon > 1){
-        searchPokemon -= 1;
-        renderPokemon(searchPokemon);
+    if(procurarPokemon > 1){
+        procurarPokemon -= 1;
+        renderPokemon(procurarPokemon);
     
 }
       
 });
 
 buttonNext.addEventListener('click', ()=>{
-    search += 1;
-    renderPokemon(search);
+    procurarPokemon += 1;
+    renderPokemon(procurarPokemon);
       
   });
-renderPokemon(search);
+renderPokemon(procurarPokemon);
 
 
